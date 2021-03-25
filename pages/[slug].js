@@ -1,17 +1,19 @@
 import Header from "../src/components/Header";
-import Body from "../src/components/Body";
+import Main from "../src/components/Main";
 
-function Home({ articles, entryTitle, header }) {
+function ArticlePage({ article }) {
   return (
     <>
-      <Header header={header} />
-
-      <Body articles={articles} />
+      <Header header={article.header} />
+      <Main article={article} />
     </>
   );
 }
 
 export async function getServerSideProps(context) {
+  const { slug } = context.params;
+  console.log(slug);
+
   const contentful = require("contentful");
   const client = contentful.createClient({
     space: "1g2jmpytazu9",
@@ -21,12 +23,13 @@ export async function getServerSideProps(context) {
 
   const response = await client.getEntries({
     include: 10,
-    content_type: "blog",
+    content_type: "article",
+    "fields.slug": slug,
   });
 
   return {
-    props: response.items[0].fields,
+    props: { article: response.items[0].fields },
   };
 }
 
-export default Home;
+export default ArticlePage;
