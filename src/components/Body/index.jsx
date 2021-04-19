@@ -1,13 +1,20 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Avatar from "react-avatar";
+import { format } from "date-fns";
+import viewport from "../../viewport";
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 20px 200px;
-  justify-content: center;
+  @media ${viewport.sm} {
+    margin: 20px 50px;
+  }
+  @media ${viewport.md} {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 20px 200px;
+    justify-content: center;
+  }
 `;
 
 const Card = styled.div`
@@ -28,27 +35,33 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 const CardBody = styled.div`
-  margin: 40px 10px;
+  margin: 30px 10px;
   justify-content: space-between;
 `;
 
 const StyledAuthor = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: regular;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 `;
 
 const StyledTitle = styled.div`
   font-weight: bold;
   font-size: 20px;
   font-family: arial;
-  margin: 20px 0 20px 0;
+  margin: 20px 0 10px 0;
 `;
 
 const LinkStyle = styled.a`
   font-size: 14px;
   color: #a85832;
   margin-right: 30px;
+`;
+
+const StyledDates = styled.div`
+  color: gray;
+  font-size: 13px;
+  margin-bottom: 30px;
 `;
 
 function Body({ articles }) {
@@ -66,6 +79,9 @@ function Body({ articles }) {
             />
             <CardBody>
               <StyledAuthor>By {article.fields.author}</StyledAuthor>
+              <StyledDates>
+                {format(new Date(article.fields.date), "PPPP")}
+              </StyledDates>
               <StyledTitle> {article.fields.title}</StyledTitle>
               <Link href={article.fields.slug} passHref>
                 <LinkStyle> Read More </LinkStyle>

@@ -1,12 +1,18 @@
 import styled from "styled-components";
 import Link from "next/link";
+import viewport from "../../viewport";
 
 const HeaderMain = styled.div`
-  background: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 80px;
+  @media ${viewport.sm} {
+    padding: 20px 40px;
+  }
+  @media ${viewport.md} {
+    background: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+  }
 `;
 
 const HeaderLogo = styled.div`
