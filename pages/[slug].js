@@ -12,7 +12,6 @@ function ArticlePage({ article }) {
 
 export async function getServerSideProps(context) {
   const { slug } = context.params;
-  console.log(slug);
 
   const contentful = require("contentful");
   const client = contentful.createClient({
