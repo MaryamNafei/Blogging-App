@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Avatar from "react-avatar";
 import { format } from "date-fns";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import viewport from "../../viewport";
 
 const PageWrapper = styled.div`
@@ -81,7 +80,7 @@ function Main({ article }) {
           <StyledDate>{format(new Date(article.date), "PPPP")}</StyledDate>
         </DateWrapper>
       </AvatarWrapper>
-      <Paragraph>{documentToHtmlString(article.paragraph)}</Paragraph>
+      <Paragraph>{article.paragraph}</Paragraph>
       <ByAuthor>By {article.author}</ByAuthor>
     </PageWrapper>
   );
